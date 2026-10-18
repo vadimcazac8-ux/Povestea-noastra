@@ -27,7 +27,7 @@ exports.handler = async (event) => {
     const bytes = Buffer.from(image.split(",")[1], "base64");
     const mime = image.slice(5, image.indexOf(";"));
     const form = new FormData();
-    form.append("model", "gpt-image-1");
+    form.append("model", "gpt-image-1-mini");
     form.append("prompt", STYLES[style] + " Preserve the people's identities, facial features, eye colors, hairstyles, and composition. Do not add or remove people. Keep the result family-friendly.");
     form.append("size", "1024x1024");
     form.append("image", new Blob([bytes], { type: mime }), "photo.png");
