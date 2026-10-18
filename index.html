@@ -11,11 +11,11 @@ aiButton.onclick = async () => {
   aiButton.disabled = true;
   aiButton.textContent = 'Se transformă...';
   try {
-    const form = new FormData();
-    form.append('photo', file);
+    const image = await new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file); });
+    const payload = JSON.stringify({ image: image, style: 'cartoon' });
     const response = await fetch('/.netlify/functions/transform', {
       method: 'POST',
-      body: form
+      headers: { 'Content-Type': 'application/json' }, body: payload
     });
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'Eroare AI');
