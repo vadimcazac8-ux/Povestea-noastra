@@ -37,7 +37,27 @@ exports.handler = async (event) => {
       headers: { Authorization: "Bearer " + process.env.OPENAI_API_KEY },
       body: form
     });
-    const result = await response.json();
+    
+const raw = await response.text();
+let result;
+
+try {
+  result = JSON.parse(raw);
+} catch (error) {
+  console.error(
+    "Raspuns invalid de la API:",
+    response.status,
+    raw.slice(0, 300)
+  );
+
+  return {
+    statusCode: 502,
+    body: JSON.stringify({
+      error: "Serviciul AI a trimis un raspuns invalid."
+    })
+  };
+}
+  
     if (!response.ok) {
       console.error("OpenAI image error:", response.status, result.error?.code);
       return { statusCode: 502, body: JSON.stringify({ error: "Nu am putut genera imaginea. Încearcă din nou." }) };
