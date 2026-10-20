@@ -32,4 +32,19 @@ aiButton.onclick = async () => {
   }
 };
 document.getElementById('photo').insertAdjacentElement('afterend', aiButton);
-</script></body></html>
+const videoButton = document.createElement('button');
+videoButton.textContent = '🎬 Creează video animat';
+videoButton.type = 'button';
+videoButton.onclick = () => {
+  alert('Funcția de creare video este în pregătire.');
+};
+document.body.appendChild(videoButton);
+ const poveste = document.createElement('textarea');
+poveste.placeholder = '✍️ Scrie povestea ta aici. Exemplu: Vreau ca personajul din fotografie să devină un supererou care zboară.';
+poveste.rows = 4;
+poveste.style.width = '100%';
+poveste.style.padding = '12px';
+poveste.style.marginTop = '15px';
+poveste.style.borderRadius = '10px';
+
+document.getElementById('photo').insertAdjacentElement('afterend', poveste);</script></body></html>
